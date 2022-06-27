@@ -11,6 +11,7 @@ return [
     'categories/show'  => 'GET',
     'categories/show-demo'  => 'GET',
 
+    'sequences/categories'  => 'GET',
     'sequences/index'  => 'GET',
     'sequences/start'  => 'POST',
     'sequences/answer' => 'POST',

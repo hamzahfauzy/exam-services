@@ -5,6 +5,9 @@ header('content-type: application/json');
 require 'config.php';
 require 'functions.php';
 require 'libs/Database.php';
+require 'libs/Auth.php';
+require 'libs/Model.php';
+require 'libs/Models/UserModel.php';
 
 $connection = require 'connection.php';
 $module     = isset($_GET['module']) && !empty($_GET['module']) ? $_GET['module'] : 'index';
