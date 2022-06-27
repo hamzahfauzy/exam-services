@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * login authentication
+ * @param username from post
+ */
+
+// username validation
+if(!isset($_POST['username']) || empty($_POST['username']))
+{
+    return response('fail','username field is required');
+}
+
 $conn = getConnection();
 
 $username = $_POST['username'];
