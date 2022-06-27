@@ -20,18 +20,20 @@ $category_id = $_GET['category_id'];
 $jurusan     = $user->participant->study;
 $category    = $db->single('categories',['id' => $category_id]);
 
-$category_posts = $db->all('category_posts',['category_id' => $category_id]);
+$category_posts = $db->all('category_post',['category_id' => $category_id]);
 foreach($category_posts as $category_post)
 {
     $post = $db->single('posts',['id' => $category_post->post_id]);
-    $post_items = $db->all('post_items',['parent_id'=>$post_id]);
+    $post_items = $db->all('post_items',['parent_id'=>$post->id]);
     foreach($post_items as $post_item)
     {
         $post->items[] = $db->single('posts',['id'=>$post_item->child_id]);
     }
     
     if(isset($post->items) && $category->test_tool == 'TPA')
-        $post->items = shuffle($post->items);
+    {
+        shuffle($post->items);
+    }
     
     $category->posts[] = $post;
     
