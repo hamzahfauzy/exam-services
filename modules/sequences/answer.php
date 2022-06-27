@@ -42,12 +42,16 @@ $answer_exists = $db->single('exam_answers',$params);
 if($answer_exists)
 {
     $db->update('exam_answers',[
-        'answer_id'   => $data['answer_id']
+        'answer_id' => $data['answer_id'],
+        'answer_content' => $data['answer_id'],
     ], $params);
 }
 else
 {
-    $db->insert('exam_answers', array_merge($params,['answer_id' => $data['answer_id']]));
+    $db->insert('exam_answers', array_merge($params,[
+        'answer_content' => $data['answer_id'],
+        'answer_id' => $data['answer_id']
+    ]));
 }
 
 return response('success','answer saved');
