@@ -16,7 +16,7 @@ return [
     'sequences/index'  => 'GET',
     'sequences/start'  => 'POST',
     'sequences/answer' => 'POST',
-    'sequences/finish' => 'PATCH',
+    'sequences/finish' => 'POST',
 
     'utils/delete' => 'DELETE',
     'utils/get'    => 'GET',
