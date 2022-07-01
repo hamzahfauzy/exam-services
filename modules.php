@@ -16,7 +16,7 @@ return [
     'sequences/index'  => 'GET',
     'sequences/start'  => 'POST',
     'sequences/answer' => 'POST',
-    'sequences/next'   => 'POST',
+    'sequences/save-category-index'   => 'POST',
     'sequences/finish' => 'POST',
 
     'utils/delete' => 'DELETE',
