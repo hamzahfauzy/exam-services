@@ -1,0 +1,1 @@
+ALTER TABLE `exam_participants` ADD `category_index` INT NOT NULL AFTER `queue_status`;
