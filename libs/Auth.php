@@ -24,7 +24,8 @@ class Auth {
             return new UserModel($user);
         }
 
-        return false;
+        echo response('fail','Unauthorized',[],true);
+        die();
 
     }
 
