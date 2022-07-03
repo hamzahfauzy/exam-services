@@ -22,6 +22,7 @@ if(!isset($_GET['exam_id']) || empty($_GET['exam_id']))
 $conn  = getConnection();
 $db    = new Database($conn);
 
+$participant = $user->participant;
 $category_id = $_GET['category_id'];
 $exam_id     = $_GET['exam_id'];
 $jurusan     = $user->participant->study;
@@ -38,7 +39,7 @@ foreach($category_posts as $category_post)
         $query = "SELECT posts.*";
         if(!isset($_GET['demo']))
         {
-            $query .= ", (SELECT COUNT(*) FROM exam_answers WHERE exam_id=$exam_id AND question_id=$post->id AND answer_id=posts.id) as selected";
+            $query .= ", (SELECT COUNT(*) FROM exam_answers WHERE exam_answers.exam_id=$exam_id AND exam_answers.question_id=$post->id AND exam_answers.answer_id=posts.id AND exam_answers.participant_id=$participant->id) as selected";
         }
 
         $query .= " FROM posts WHERE posts.id = $post_item->child_id";
