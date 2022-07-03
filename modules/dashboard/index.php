@@ -21,7 +21,8 @@ if($participant)
     foreach($examParticipants as $examParticipant)
     {
         $exam = $db->single('exams',['id'=>$examParticipant->exam_id]);
-        $exam->in_time = strtotime($exam->start_time) <= $now && strtotime($exam->end_time) >= $now;
+        $exam->in_time   = strtotime($exam->start_time) <= $now && strtotime($exam->end_time) >= $now;
+        $exam->video_url = 'http://video.arunika-online.com/v1';
         $examParticipant->exam = $exam;
     }
 

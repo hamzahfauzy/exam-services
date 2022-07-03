@@ -18,18 +18,15 @@ $db    = new Database($conn);
 
 $exam_id = $_GET['exam_id'];
 $exam    = $db->single('exams',['id'=>$exam_id]);
-$jurusan = $user->participant->study;
-$params  = params();
-$group_id   = $exam->test_group;
-$test_group = $params['test_group'];
-$test_group = $test_group[$group_id];
-$tools      = $test_group['tools'];
-$in         = '"'.implode('","',$tools).'"';
+
+$groups  = $db->all('group_items',['group_id' => $exam->group_id],['sequenced_number'=>'ASC']);
+$groups  = array_map(function($g){ return $g->category_id; }, $groups);
+$in      = implode(',', $groups);
 
 $categories = $db->all('categories',[
-    'test_tool' => ['IN',"(".$in.")"]
+    'id' => ['IN',"(".$in.")"]
 ],[
-    'sequenced_number'=>'asc'
+    'field'=>"(id,".$in.")"
 ]);
 
 return response('success','categories retrieved', $categories);

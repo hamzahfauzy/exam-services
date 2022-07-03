@@ -35,13 +35,13 @@ foreach($category_posts as $category_post)
     foreach($post_items as $post_item)
     {
         // get item query
-        $query = "SELECT 
-                    posts.*, 
-                    (SELECT COUNT(*) FROM exam_answers WHERE exam_id=$exam_id AND question_id=$post->id AND answer_id=posts.id) as selected 
-                  FROM 
-                    posts 
-                  WHERE 
-                    id = $post_item->child_id";
+        $query = "SELECT posts.*";
+        if(!isset($_GET['demo']))
+        {
+            $query .= ", (SELECT COUNT(*) FROM exam_answers WHERE exam_id=$exam_id AND question_id=$post->id AND answer_id=posts.id) as selected";
+        }
+
+        $query .= "FROM posts WHERE posts.id = $post_item->child_id";
         $db->query = $query;
         $item = $db->exec('single');
         
