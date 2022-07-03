@@ -41,7 +41,7 @@ foreach($category_posts as $category_post)
             $query .= ", (SELECT COUNT(*) FROM exam_answers WHERE exam_id=$exam_id AND question_id=$post->id AND answer_id=posts.id) as selected";
         }
 
-        $query .= "FROM posts WHERE posts.id = $post_item->child_id";
+        $query .= " FROM posts WHERE posts.id = $post_item->child_id";
         $db->query = $query;
         $item = $db->exec('single');
         
