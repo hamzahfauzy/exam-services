@@ -29,7 +29,11 @@ class Database
         $this->table = $table;
         $this->query = "INSERT INTO $table";
         $fields = implode(',',array_keys($val));
-        $values = "'".implode("','",array_values($val))."'";
+        
+        $values = array_values($val);
+        $values = $this->sanitized_values($values);
+        $values = "'".implode("','",$values)."'";
+        
         $this->query .= "($fields)VALUES($values)";
         return $this->exec('insert');
     }
@@ -257,6 +261,17 @@ class Database
         }
 
         return $string;
+    }
+    
+    function sanitized_values(array $values)
+    {
+        
+        foreach($values as $key => $value)
+        {
+            $values[$key] = $this->connection->real_escape_string($value);
+        }
+
+        return $values;
     }
 
     function build_order($order)
