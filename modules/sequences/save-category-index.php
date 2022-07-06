@@ -33,4 +33,4 @@ $db->update('exam_participants',[
     'exam_id'        => $data['exam_id'],
 ]);
 
-return response('success','exam finished');
+return response('success','category saved');

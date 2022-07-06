@@ -50,7 +50,8 @@ else
 {
     $db->insert('exam_answers', array_merge($params,[
         'answer_content' => $data['answer_id'],
-        'answer_id' => $data['answer_id']
+        'answer_id' => $data['answer_id'],
+        'created_at' => date('Y-m-d H:i:s')
     ]));
 }
 
