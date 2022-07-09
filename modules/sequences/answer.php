@@ -39,20 +39,24 @@ $params = [
 ];
 $answer_exists = $db->single('exam_answers',$params);
 
+$value = [
+    'answer_id' => $data['answer_id'],
+    'answer_content' => $data['answer_id'],
+];
+
+if(!is_int($data['answer_id']))
+{
+    unset($value['answer_id']);
+}
+
 if($answer_exists)
 {
-    $db->update('exam_answers',[
-        'answer_id' => $data['answer_id'],
-        'answer_content' => $data['answer_id'],
-    ], $params);
+    $db->update('exam_answers', $value, $params);
 }
 else
 {
-    $db->insert('exam_answers', array_merge($params,[
-        'answer_content' => $data['answer_id'],
-        'answer_id' => $data['answer_id'],
-        'created_at' => date('Y-m-d H:i:s')
-    ]));
+    $value['created_at'] = date('Y-m-d H:i:s');
+    $db->insert('exam_answers', array_merge($params,$value));
 }
 
 return response('success','answer saved');
